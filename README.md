@@ -1,6 +1,34 @@
-# trello-form
+# Trello Contact Vue
 
 > A Vue.js project
+
+## Install
+
+### Example index.html
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>trello-form</title>
+    <link rel="stylesheet" href="/static/css/bulma.css">
+    <link rel="stylesheet" href="/static/css/app.css">
+  </head>
+  <body>
+    <div id="vue">
+      <div class="container form-container">
+        <h1 class="title">Trello Contact Vue</h1>
+        <trello-form oauth-key="[oauth-key]" board-id="[board-id]"></trello-form>
+      </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://api.trello.com/1/client.js?key=[api-key]"></script>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
+
+```
 
 ## Build Setup
 

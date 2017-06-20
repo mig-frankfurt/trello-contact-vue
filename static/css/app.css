@@ -1,0 +1,21 @@
+body {
+    background-color: whitesmoke;
+    padding: 50px;
+}
+
+.form-container {
+    padding-top: 50px;
+    padding-bottom: 75px;
+    width: 800px;
+}
+
+.container {
+    background-color: white;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 grey;
+}
+
+.required {
+    color: red;
+}

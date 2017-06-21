@@ -1,4 +1,4 @@
-# Trello Contact Vue
+# Trello Contact Vue [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/mig-frankfurt/trello-contact-vue/blob/master/LICENSE.txt)
 
 > Trello Contact Vue is a Vue.js library for transforming Trello into a ticket system without any hassle. You just import the library and add your Trello keys and your board id - thats it.
 
@@ -8,7 +8,7 @@
  - Reads the board label names and add them as categories into the contact form
  - Displays all informations well-formatted in the description section (categories will be transformed to card labels)
  - All new cards will be added to the left list on the board
- - Supports following CSS Frameworks: Bulma
+ - Supports following CSS Frameworks: Bulma *(more to come!)*
 
 ## Install
 
@@ -33,10 +33,10 @@ Vue.component('trello-form', require('<package-name>'))
 
 ### Get your data from Trello
 
- 1. Get your API key: 
- 2. Download trello's client.js and add your API key
- 3. Get your OAuth key:
- 4. Get your board id:
+ 1. Get your app-key: https://trello.com/app-key
+ 2. Reference Trello's client.js and add your app-key: `<script src="https://api.trello.com/1/client.js?key=[app-key]"></script>`
+ 3. Get your OAuth key (insert your app-key at the end!): https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=app-key
+ 4. Get your board id from URL: e.g. https://trello.com/b/board-id/board-name
 
 ### Example index.html
 
@@ -57,7 +57,7 @@ Vue.component('trello-form', require('<package-name>'))
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script src="https://api.trello.com/1/client.js?key=[api-key]"></script>
+    <script src="https://api.trello.com/1/client.js?key=[app-key]"></script>
     <!-- built files will be auto injected -->
   </body>
 </html>
@@ -109,9 +109,9 @@ npm test
 
 ## Developed by
 
-Medical Informatics Group (MIG)
-University Hospital Frankfurt
-Theodor-Stern-Kai 7
+Medical Informatics Group (MIG)\
+University Hospital Frankfurt\
+Theodor-Stern-Kai 7\
 60590 Frankfurt
 
 **Maintained by:** Patric Vormstein (vormstein@med.uni-frankfurt.de)

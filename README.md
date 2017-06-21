@@ -10,6 +10,8 @@
  - All new cards will be added to the left list on the board
  - Supports following CSS Frameworks: Bulma *(more to come!)*
 
+![](https://github.com/mig-frankfurt/trello-contact-vue/blob/master/readme/demonstration.gif?raw=true)
+
 ## Install
 
 ### Prequisites

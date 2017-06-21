@@ -1,8 +1,14 @@
 <template>
     <div id="trello-form">
         <div v-show="state.finished" class="notification is-success" :class="{ 'is-success': !state.withError, 'is-danger': state.withError }">
-            Vielen Dank, wir haben Ihre Anfrage erhalten! <br>
-            Möchten Sie eine weitere Anfrage stellen?
+            <div v-if="!state.withError">
+                {{ successText }}<br>
+                {{ redoText }}
+            </div>
+            <div v-if="state.withError">
+                {{ failText }} <br>
+                => <i>{{ state.errorMessage }}</i>
+            </div>
         </div>
         <form v-show="!state.finished" action="">
             <!-- Name -->
@@ -97,6 +103,12 @@
           type: String,
           required: false,
           default: 'Es ist leider ein Fehler aufgetreten. Versuchen Sie es erneut.'
+        },
+
+        redoText: {
+          type: String,
+          required: false,
+          default: 'Do you want to add another ticket?'
         }
       },
 
@@ -130,12 +142,16 @@
             .map((label) => {
               this.categories.push({ name: label.name, id: label.id, color: label.color })
             }).value()
+        }, () => {
+          this.finishWithError('Could not retrieve label names')
         })
 
         // Get the destination list
         // eslint-disable-next-line no-undef
         Trello.get('/boards/' + this.boardId + '/lists', (response) => {
           this.listId = _(response).first().id
+        }, () => {
+          this.finishWithError('Could not retrieve list id')
         })
       },
 
@@ -143,7 +159,8 @@
         return {
           state: {
             finished: false,
-            withError: false
+            withError: false,
+            errorMessage: ''
           },
           listId: '',
           categories: [],
@@ -208,7 +225,7 @@
             this.finishWithoutError()
           }, () => {
             console.log('Error sending card ...')
-            this.finishWithError()
+            this.finishWithError('Could not sent message to Trello')
           })
         },
 
@@ -229,12 +246,13 @@
 
         authenticationFailure () {
           console.log('Error when trying to authenticate to Trello.')
-          this.finishWithError()
+          this.finishWithError('Could not authenticate to Trello')
         },
 
-        finishWithError () {
+        finishWithError (error) {
           this.state.finished = true
           this.state.withError = true
+          this.state.errorMessage = error
         },
 
         finishWithoutError () {

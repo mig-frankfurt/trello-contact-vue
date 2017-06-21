@@ -1,6 +1,11 @@
+html {
+    height: 100%;
+}
+
 body {
     background-color: whitesmoke;
     padding: 50px;
+    min-height: 100%;
 }
 
 .form-container {

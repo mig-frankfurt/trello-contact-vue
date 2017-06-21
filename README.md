@@ -10,7 +10,7 @@
  - All new cards will be added to the left list on the board
  - Supports following CSS Frameworks: Bulma *(more to come!)*
 
-![](https://github.com/mig-frankfurt/trello-contact-vue/blob/master/readme/demonstration.gif?raw=true)
+![](https://github.com/mig-frankfurt/trello-contact-vue/blob/master/readme/demonstration_small.gif?raw=true)
 
 ## Install
 
@@ -34,7 +34,7 @@ Vue.component('trello-form', require('<package-name>'))
 ```
 
 ### Get your data from Trello
-
+(Maybe you want to create a new Trello user for security reasons first.)
  1. Get your app-key: https://trello.com/app-key
  2. Reference Trello's client.js and add your app-key: `<script src="https://api.trello.com/1/client.js?key=[app-key]"></script>`
  3. Get your OAuth key (insert your app-key at the end!): https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=app-key
@@ -83,6 +83,43 @@ Vue.component('trello-form', require('<package-name>'))
 | success-text | String | false | 'Thank you! We have received your message.' |
 | fail-text | String | false | 'Looks that something went wrong. Try again!' |
 | redo-text | String | false | 'Do you want to add another ticket?' |
+| label-name-text | String | false | 'Your name' |
+| label-mail-text | String | false | 'Your e-mail' |
+| label-contact-data-text | String | false | 'Additional contact data' |
+| label-category-text | String | false | 'Category' |
+| label-title-text | String | false | 'Title' |
+| label-details-text | String | false | 'Details' |
+| placeholder-name-text | String | false | 'e.g. John Doe' |
+| placeholder-mail-text | String | false | 'e.g. jdoe@mail.fake' |
+| placeholder-contact-data-text | String | false | 'Additional Contact Data' |
+| placeholder-title-text | String | false | 'e.g. Help with problem XYZ' |
+| placeholder-details-text | String | false | 'Describe your problem as detailed as you can' |
+| submit-button-text | String | false | 'Submit' |
+| reset-button-text | String | false | 'Reset' |
+
+### Full import
+
+```html
+<trello-form oauth-key="[oauth-key]"
+                     board-id="[board-id]"
+                     success-text="Vielen Dank! Wir haben Ihre Anfrage entgegengenommen."
+                     fail-text="Hoppla, da ist wohl etwas schief gelaufen. Versuchen Sie es nochmal."
+                     redo-text="Möchten Sie eine weitere Anfrage einreichen?"
+                     label-name-text="Ihr Name"
+                     label-mail-text="Ihre E-Mail"
+                     label-contact-data-text="Weitere Kontaktdaten"
+                     label-category-text="Kategorie"
+                     label-title-text="Kurzer Titel für die Anfrage"
+                     label-details-text="Wobei können wir Ihnen behilflich sein?"
+                     placeholder-name-text="z.B. Dr. John Doe"
+                     placeholder-mail-text="z.B. jdoe@mail.fake"
+                     placeholder-contact-data-text="Haus? Raumnummer? Telefonnummer?"
+                     placeholder-title-text="z.B. Hilfe beim Unwandeln von Patientendaten"
+                     placeholder-details-text="Beschreiben Sie ihr Problem kurz und prägnant"
+                     submit-button-text="Abschicken"
+                     reset-button-text="Zurücksetzen"
+        ></trello-form>
+```
 
 ## How to build (for developers only)
 

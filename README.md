@@ -1,8 +1,42 @@
 # Trello Contact Vue
 
-> A Vue.js project
+> Trello Contact Vue is a Vue.js library for transforming Trello into a ticket system without any hassle. You just import the library and add your Trello keys and your board id - thats it.
+
+## Features
+
+ - Can be imported into any Vue.js powered front end
+ - Reads the board label names and add them as categories into the contact form
+ - Displays all informations well-formatted in the description section (categories will be transformed to card labels)
+ - All new cards will be added to the left list on the board
+ - Supports following CSS Frameworks: Bulma
 
 ## Install
+
+### Prequisites
+
+ - [Vue.js](https://vuejs.org/) (`npm install vue`)
+ - [Bulma](http://bulma.io)
+
+### npm
+
+```shell
+$ npm install <package-name>
+```
+
+### Register to your project
+
+```js
+import Vue from 'vue'
+
+Vue.component('trello-form', require('<package-name>'))
+```
+
+### Get your data from Trello
+
+ 1. Get your API key: 
+ 2. Download trello's client.js and add your API key
+ 3. Get your OAuth key:
+ 4. Get your board id:
 
 ### Example index.html
 
@@ -30,7 +64,25 @@
 
 ```
 
-## Build Setup
+## Documentation
+
+### Minimal import
+
+```html
+<trello-form oauth-key="[oauth-key]" board-id="[board-id]"></trello-form>
+```
+
+### Properties
+
+| Property | Type | Required | Default Value |
+| -------- | ---- | -------- | ------------- |
+| oauth-key | String | true | - |
+| board-id | String | true | - |
+| success-text | String | false | 'Thank you! We have received your message.' |
+| fail-text | String | false | 'Looks that something went wrong. Try again!' |
+| redo-text | String | false | 'Do you want to add another ticket?' |
+
+## How to build (for developers only)
 
 ``` bash
 # install dependencies
@@ -55,4 +107,35 @@ npm run e2e
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Developed by
+
+Medical Informatics Group (MIG)
+University Hospital Frankfurt
+Theodor-Stern-Kai 7
+60590 Frankfurt
+
+**Maintained by:** Patric Vormstein (vormstein@med.uni-frankfurt.de)
+
+## License
+
+MIT License
+
+Copyright (c) 2017 Medical Informatics Group (MIG) Frankfurt
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

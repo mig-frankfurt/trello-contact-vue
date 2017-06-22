@@ -1,4 +1,4 @@
-# Trello Contact Vue [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/mig-frankfurt/trello-contact-vue/blob/master/LICENSE.txt)
+# Trello Contact Vue [![npm (scoped)](https://img.shields.io/npm/v/@mig-frankfurt/trello-contact-vue.svg?style=flat-square)](https://www.npmjs.com/package/@mig-frankfurt/trello-contact-vue) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/mig-frankfurt/trello-contact-vue/blob/master/LICENSE.txt)
 
 > Trello Contact Vue is a Vue.js library for transforming Trello into a ticket system without any hassle. You just import the library and add your Trello keys and your board id - thats it.
 
@@ -22,15 +22,16 @@
 ### npm
 
 ```shell
-$ npm install <package-name>
+$ npm install @mig-frankfurt/trello-contact-vue
 ```
 
 ### Register to your project
 
 ```js
 import Vue from 'vue'
+import TrelloContactVue from '@mig-frankfurt/trello-contact-vue'
 
-Vue.component('trello-form', require('<package-name>'))
+Vue.component('trello-form', TrelloContactVue)
 ```
 
 ### Get your data from Trello

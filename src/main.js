@@ -13,4 +13,4 @@ new Vue({
 })
 
 // Export for package
-module.exports = TrelloContactVue
+export default TrelloContactVue

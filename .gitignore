@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
-dist/
+dist/static/js/*
+dist/static/*
+dist/*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -10,3 +12,5 @@ selenium-debug.log
 .env
 .idea/
 index.html
+!dist/static/js/trello-contact-vue.js
+!dist/static/js/trello-contact-vue.js.map

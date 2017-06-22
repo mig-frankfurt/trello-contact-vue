@@ -1,7 +1,7 @@
 {
-  "name": "trello-form",
+  "name": "@mig-frankfurt/trello-contact-vue",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A Vue.js library for transforming Trello into a ticket system without any hassle",
   "author": "Patric Vormstein <vormstein@med.uni-frankfurt.de>",
   "license": "MIT",
   "private": true,

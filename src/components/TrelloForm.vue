@@ -93,6 +93,12 @@
           required: true
         },
 
+        cssFramework: {
+          type: String,
+          required: false,
+          default: 'bulma'
+        },
+
         successText: {
           type: String,
           required: false,

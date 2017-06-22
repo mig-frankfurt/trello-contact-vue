@@ -80,6 +80,7 @@ Vue.component('trello-form', require('<package-name>'))
 | -------- | ---- | -------- | ------------- |
 | oauth-key | String | true | - |
 | board-id | String | true | - |
+| css-framework | String { 'bulma' } | false | 'bulma' |
 | success-text | String | false | 'Thank you! We have received your message.' |
 | fail-text | String | false | 'Looks that something went wrong. Try again!' |
 | redo-text | String | false | 'Do you want to add another ticket?' |
@@ -101,24 +102,24 @@ Vue.component('trello-form', require('<package-name>'))
 
 ```html
 <trello-form oauth-key="[oauth-key]"
-                     board-id="[board-id]"
-                     success-text="Vielen Dank! Wir haben Ihre Anfrage entgegengenommen."
-                     fail-text="Hoppla, da ist wohl etwas schief gelaufen. Versuchen Sie es nochmal."
-                     redo-text="Möchten Sie eine weitere Anfrage einreichen?"
-                     label-name-text="Ihr Name"
-                     label-mail-text="Ihre E-Mail"
-                     label-contact-data-text="Weitere Kontaktdaten"
-                     label-category-text="Kategorie"
-                     label-title-text="Kurzer Titel für die Anfrage"
-                     label-details-text="Wobei können wir Ihnen behilflich sein?"
-                     placeholder-name-text="z.B. Dr. John Doe"
-                     placeholder-mail-text="z.B. jdoe@mail.fake"
-                     placeholder-contact-data-text="Haus? Raumnummer? Telefonnummer?"
-                     placeholder-title-text="z.B. Hilfe beim Unwandeln von Patientendaten"
-                     placeholder-details-text="Beschreiben Sie ihr Problem kurz und prägnant"
-                     submit-button-text="Abschicken"
-                     reset-button-text="Zurücksetzen"
-        ></trello-form>
+             board-id="[board-id]"
+             success-text="Vielen Dank! Wir haben Ihre Anfrage entgegengenommen."
+             fail-text="Hoppla, da ist wohl etwas schief gelaufen. Versuchen Sie es nochmal."
+             redo-text="Möchten Sie eine weitere Anfrage einreichen?"
+             label-name-text="Ihr Name"
+             label-mail-text="Ihre E-Mail"
+             label-contact-data-text="Weitere Kontaktdaten"
+             label-category-text="Kategorie"
+             label-title-text="Kurzer Titel für die Anfrage"
+             label-details-text="Wobei können wir Ihnen behilflich sein?"
+             placeholder-name-text="z.B. Dr. John Doe"
+             placeholder-mail-text="z.B. jdoe@mail.fake"
+             placeholder-contact-data-text="Haus? Raumnummer? Telefonnummer?"
+             placeholder-title-text="z.B. Hilfe beim Unwandeln von Patientendaten"
+             placeholder-details-text="Beschreiben Sie ihr Problem kurz und prägnant"
+             submit-button-text="Abschicken"
+             reset-button-text="Zurücksetzen"
+></trello-form>
 ```
 
 ## How to build (for developers only)

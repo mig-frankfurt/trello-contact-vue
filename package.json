@@ -5,7 +5,6 @@
   "main": "dist/static/js/trello-contact-vue.js",
   "author": "Patric Vormstein <vormstein@med.uni-frankfurt.de>",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",

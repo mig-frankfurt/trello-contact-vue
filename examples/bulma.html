@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Bulma Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            background-color: whitesmoke;
+            padding: 50px;
+            min-height: 100%;
+        }
+
+        .form-container {
+            padding-top: 50px;
+            padding-bottom: 75px;
+            width: 800px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px 0 grey;
+        }
+
+        .required {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="container form-container">
+        <trello-form oauth-key="[oauth-key]"
+                     board-id="[board-id]"
+                     success-text="Vielen Dank! Wir haben Ihre Anfrage entgegengenommen."
+                     fail-text="Hoppla, da ist wohl etwas schief gelaufen. Versuchen Sie es nochmal."
+                     redo-text="Möchten Sie eine weitere Anfrage einreichen?"
+                     label-name-text="Ihr Name"
+                     label-mail-text="Ihre E-Mail"
+                     label-contact-data-text="Weitere Kontaktdaten"
+                     label-category-text="Kategorie"
+                     label-title-text="Kurzer Titel für die Anfrage"
+                     label-details-text="Wobei können wir Ihnen behilflich sein?"
+                     placeholder-name-text="z.B. Dr. John Doe"
+                     placeholder-mail-text="z.B. jdoe@mail.fake"
+                     placeholder-contact-data-text="Haus? Raumnummer? Telefonnummer?"
+                     placeholder-title-text="z.B. Hilfe beim Unwandeln von Patientendaten"
+                     placeholder-details-text="Beschreiben Sie ihr Problem kurz und prägnant"
+                     submit-button-text="Abschicken"
+                     reset-button-text="Zurücksetzen"
+        ></trello-form>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="https://api.trello.com/1/client.js?key=[app-key]"></script>
+<script src="../dist/static/js/trello-contact-vue.js"></script>
+</body>
+</html>

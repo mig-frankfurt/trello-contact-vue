@@ -80,7 +80,7 @@
     import _ from 'lodash'
 
     export default {
-      name: 'mig-form',
+      name: 'trello-contact-form',
 
       props: {
         oauthKey: {

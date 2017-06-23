@@ -9,7 +9,7 @@ Vue.component('trello-form', TrelloContactVue)
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#vue'
+  el: '#tcv-vue'
 })
 
 // Export for package

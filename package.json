@@ -1,10 +1,14 @@
 {
   "name": "@mig-frankfurt/trello-contact-vue",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Vue.js library for transforming Trello into a ticket system without any hassle",
   "main": "dist/static/js/trello-contact-vue.js",
   "author": "Patric Vormstein <vormstein@med.uni-frankfurt.de>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mig-frankfurt/trello-contact-vue.git"
+  },
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",

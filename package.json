@@ -1,6 +1,6 @@
 {
   "name": "@mig-frankfurt/trello-contact-vue",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A Vue.js library for transforming Trello into a ticket system without any hassle",
   "main": "dist/static/js/trello-contact-vue.js",
   "author": "Patric Vormstein <vormstein@med.uni-frankfurt.de>",

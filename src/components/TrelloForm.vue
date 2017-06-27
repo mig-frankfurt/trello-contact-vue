@@ -220,13 +220,16 @@
         // Set Categories
         // eslint-disable-next-line no-undef
         Trello.get('/boards/' + this.boardId + '/labels', (response) => {
+          // Gather named labels
           _(response)
             .reject((label) => {
               return label.name === ''
             })
+            .sortBy((label) => label.name.toLowerCase())
             .map((label) => {
               this.categories.push({ name: label.name, id: label.id, color: label.color })
-            }).value()
+            })
+            .value()
         }, () => {
           this.finishWithError('Could not retrieve label names')
         })

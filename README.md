@@ -74,6 +74,8 @@ Vue.component('trello-form', TrelloContactVue)
 | placeholder-contact-data-text | String | false | 'Additional Contact Data' |
 | placeholder-title-text | String | false | 'e.g. Help with problem XYZ' |
 | placeholder-details-text | String | false | 'Describe your problem as detailed as you can' |
+| validation-empty-text | String | false | 'Please fill out every required input field' |
+| validation-mail-text | String | false | 'This email is invalid' |
 | submit-button-text | String | false | 'Submit' |
 | reset-button-text | String | false | 'Reset' |
 
@@ -96,6 +98,8 @@ Vue.component('trello-form', TrelloContactVue)
              placeholder-contact-data-text="Haus? Raumnummer? Telefonnummer?"
              placeholder-title-text="z.B. Hilfe beim Unwandeln von Patientendaten"
              placeholder-details-text="Beschreiben Sie ihr Problem kurz und prägnant"
+             validation-empty-text="Bitte füllen Sie alle erforderlichen Felder aus"
+             validation-mail-text="Diese E-Mail-Adresse ist ungültig"
              submit-button-text="Abschicken"
              reset-button-text="Zurücksetzen"
 ></trello-form>

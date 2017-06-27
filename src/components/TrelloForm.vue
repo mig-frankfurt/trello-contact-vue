@@ -10,21 +10,28 @@
                 => <i>{{ state.errorMessage }}</i>
             </div>
         </div>
+        <div v-show="!validation.allFields.areValid" class="notification is-danger">
+            {{ validationEmptyText }}
+        </div>
         <form v-show="!state.finished" action="" autocomplete="off">
             <!-- Name -->
             <div class="field">
                 <label class="label">{{ labelNameText }} <span class="required">*</span></label>
                 <p class="control">
-                    <input class="input" type="text" :placeholder="placeholderNameText" v-model="formData.name">
+                    <input class="input" type="text" :placeholder="placeholderNameText" v-model="formData.name" @change="undoValidation('empty')">
                 </p>
             </div>
 
             <!-- E-Mail -->
             <div class="field">
-                <label class="label">{{ labelMailText }} <span class="required">*</span></label>
-                <p class="control">
-                    <input class="input" type="email" :placeholder="placeholderMailText" v-model="formData.mail">
+                <label class="label" :class="{ 'has-icons-right': !validation.email.isValid }">{{ labelMailText }} <span class="required">*</span></label>
+                <p class="control" :class="{ 'has-icons-right': !validation.email.isValid }">
+                    <input class="input" :class="{ 'is-danger': !validation.email.isValid }" type="email" :placeholder="placeholderMailText" v-model="formData.mail" @change="undoValidation('mail')">
+                    <span v-show="!validation.email.isValid" class="icon is-small is-right">
+                      <i class="fa fa-warning"></i>
+                    </span>
                 </p>
+                <p v-show="!validation.email.isValid" class="help is-danger">{{ validationMailText }}</p>
             </div>
 
             <!-- More Contact Data -->
@@ -39,11 +46,11 @@
             <div class="field">
                 <label class="label">{{ labelCategoryText }} <span class="required">*</span></label>
                 <p class="control">
-            <span class="select">
-              <select v-model="formData.category">
-                <option v-for="c in categories" :value="c.id">{{ c.name }}</option>
-              </select>
-            </span>
+                    <span class="select">
+                      <select v-model="formData.category" @change="undoValidation('empty')">
+                        <option v-for="c in categories" :value="c.id">{{ c.name }}</option>
+                      </select>
+                    </span>
                 </p>
             </div>
 
@@ -51,7 +58,7 @@
             <div class="field">
                 <label class="label">{{ labelTitleText }} <span class="required">*</span></label>
                 <p class="control">
-                    <input class="input" type="text" :placeholder="placeholderTitleText" v-model="formData.title">
+                    <input class="input" type="text" :placeholder="placeholderTitleText" v-model="formData.title" @change="undoValidation('empty')">
                 </p>
             </div>
 
@@ -59,7 +66,7 @@
             <div class="field">
                 <label class="label">{{ labelDetailsText }} <span class="required">*</span></label>
                 <p class="control">
-                    <textarea class="textarea area-height-l" :placeholder="placeholderDetailsText" v-model="formData.inquiry"></textarea>
+                    <textarea class="textarea area-height-l" :placeholder="placeholderDetailsText" v-model="formData.inquiry" @change="undoValidation('empty')"></textarea>
                 </p>
             </div>
 
@@ -185,6 +192,18 @@
           default: 'Describe your problem as detailed as you can'
         },
 
+        validationEmptyText: {
+          type: String,
+          required: false,
+          default: 'Please fill out every required input field'
+        },
+
+        validationMailText: {
+          type: String,
+          required: false,
+          default: 'This email is invalid'
+        },
+
         // Buttons
         submitButtonText: {
           type: String,
@@ -259,6 +278,14 @@
             category: '',
             title: '',
             inquiry: ''
+          },
+          validation: {
+            email: {
+              isValid: true
+            },
+            allFields: {
+              areValid: true
+            }
           }
         }
       },
@@ -288,6 +315,12 @@
       methods: {
         createCard () {
           if (this.nameIsEmpty || this.mailIsEmpty || this.categoryIsEmpty || this.titleIsEmpty || this.inquiryIsEmpty) {
+            this.validation.allFields.areValid = false
+            return
+          }
+
+          if (!this.mailIsValid(this.formData.mail)) {
+            this.validation.email.isValid = false
             return
           }
 
@@ -346,6 +379,22 @@
         finishWithoutError () {
           this.state.finished = true
           this.state.withError = false
+        },
+
+        mailIsValid (mail) {
+          let re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+          return re.test(mail)
+        },
+
+        undoValidation (field) {
+          switch (field) {
+            case 'empty':
+              this.validation.allFields.areValid = true
+              break
+            case 'mail':
+              this.validation.email.isValid = true
+              this.validation.allFields.areValid = true
+          }
         }
       }
     }

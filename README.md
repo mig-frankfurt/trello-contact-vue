@@ -136,6 +136,7 @@ Medical Informatics Group (MIG)\
 University Hospital Frankfurt\
 Theodor-Stern-Kai 7\
 60590 Frankfurt
+[mig-frankfurt.de](https://www.mig-frankfurt.de/)
 
 **Maintained by:** Patric Vormstein (vormstein@med.uni-frankfurt.de)
 

@@ -256,7 +256,13 @@
         // Get the destination list
         // eslint-disable-next-line no-undef
         Trello.get('/boards/' + this.boardId + '/lists', (response) => {
-          this.listId = _(response).first().id
+          let firstList = _(response).first()
+          
+          if (firstList !== undefined) {
+            this.listId = firstList.id
+          } else {
+            this.finishWithError('There is no list on board available. Please create one in Trello first.')
+          }
         }, () => {
           this.finishWithError('Could not retrieve list id')
         })

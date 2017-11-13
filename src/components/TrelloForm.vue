@@ -3,7 +3,7 @@
         <div v-show="state.finished" class="notification is-success" :class="{ 'is-success': !state.withError, 'is-danger': state.withError }">
             <div v-if="!state.withError">
                 {{ successText }}<br>
-                <a href=".">{{ redoText }}</a>
+                <a :href="reloadUrl">{{ redoText }}</a>
             </div>
             <div v-if="state.withError">
                 {{ failText }} <br>
@@ -48,7 +48,7 @@
                 <p class="control">
                     <span class="select">
                       <select v-model="formData.category" @change="undoValidation('empty')">
-                        <option v-for="c in categories" :value="c.id">{{ c.name }}</option>
+                        <option v-for="(c, idx) in categories" :key="idx" :value="c.id">{{ c.name }}</option>
                       </select>
                     </span>
                 </p>
@@ -215,6 +215,13 @@
           type: String,
           required: false,
           default: 'Reset'
+        },
+        
+        // Reload URL
+        reloadUrl: {
+          type: String,
+          required: false,
+          default: () => window.location.href
         }
       },
 

@@ -78,6 +78,7 @@ Vue.component('trello-form', TrelloContactVue)
 | validation-mail-text | String | false | 'This email is invalid' |
 | submit-button-text | String | false | 'Submit' |
 | reset-button-text | String | false | 'Reset' |
+| reload-url | String | false | `window.location.href` |
 
 ### Full import
 
@@ -102,6 +103,7 @@ Vue.component('trello-form', TrelloContactVue)
              validation-mail-text="Diese E-Mail-Adresse ist ungültig"
              submit-button-text="Abschicken"
              reset-button-text="Zurücksetzen"
+             reload-url="http://localhost:8080"
 ></trello-form>
 ```
 

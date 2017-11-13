@@ -76,6 +76,7 @@ Vue.component('trello-form', TrelloContactVue)
 | placeholder-details-text | String | false | 'Describe your problem as detailed as you can' |
 | validation-empty-text | String | false | 'Please fill out every required input field' |
 | validation-mail-text | String | false | 'This email is invalid' |
+| card-title-template | String | false | '{title}' <br>*Valid placeholders:* <br>{name}, {email}, {contactData}, {category}, {title}, {inquiry} |
 | header-name | String | false | 'Name' |
 | header-e-mail | String | false | 'E-Mail' |
 | header-description | String | false | 'Description' |

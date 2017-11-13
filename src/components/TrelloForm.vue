@@ -204,6 +204,13 @@
           default: 'This email is invalid'
         },
         
+        // Card Title Template
+        cardTitleTemplate: {
+          type: String,
+          required: false,
+          default: '{title}'
+        },
+        
         // Headers in Trello
         headerName: {
           type: String,
@@ -370,7 +377,7 @@
 
           // Build card
           let card = {
-            name: this.formData.title,
+            name: this.buildCardTitle(),
             desc: description,
             pos: 'bottom',
             idList: this.listId,
@@ -397,6 +404,36 @@
             title: '',
             inquiry: ''
           }
+        },
+        
+        buildCardTitle () {
+          let replaceables = {
+            '{name}': this.formData.name,
+            '{email}': this.formData.mail,
+            '{contactData}': this.formData.contactData,
+            '{category}': this.getCategoryName(this.formData.category),
+            '{title}': this.formData.title,
+            '{inquiry}': this.formData.inquiry
+          }
+          
+          let cardTitle = this.cardTitleTemplate
+          for (let key in replaceables) {
+            cardTitle = this.replacePlaceholder(cardTitle, key, replaceables[key])
+          }
+          
+          return cardTitle
+        },
+        
+        replacePlaceholder (str, placeholder, replacer) {
+          if (str.includes(placeholder)) {
+            return str.replace(placeholder, replacer)
+          }
+          
+          return str
+        },
+        
+        getCategoryName (id) {
+          return _.find(this.categories, (category) => category.id === id).name
         },
 
         authenticationSuccess () {

@@ -203,6 +203,31 @@
           required: false,
           default: 'This email is invalid'
         },
+        
+        // Headers in Trello
+        headerName: {
+          type: String,
+          required: false,
+          default: 'Name'
+        },
+        
+        headerEMail: {
+          type: String,
+          required: false,
+          default: 'E-Mail'
+        },
+        
+        headerDescription: {
+          type: String,
+          required: false,
+          default: 'Description'
+        },
+        
+        headerAdditionalContactData: {
+          type: String,
+          required: false,
+          default: 'Additional Contact Data'
+        },
 
         // Buttons
         submitButtonText: {
@@ -338,9 +363,9 @@
           }
 
           // Create Description
-          let description = '**Name:** ' + this.formData.name + '\n**E-Mail:** ' + this.formData.mail + '\n\n\n**Beschreibung**\n' + this.formData.inquiry
+          let description = `**${this.headerName}:** ${this.formData.name}\n**${this.headerEMail}:** ${this.formData.mail}\n\n\n**${this.headerDescription}:**\n${this.formData.inquiry}`
           if (this.formData.contactData !== '') {
-            description += '\n\n\n**Weitere Kontaktdaten**\n' + this.formData.contactData
+            description += `\n\n\n**${this.headerAdditionalContactData}:**\n${this.formData.contactData}`
           }
 
           // Build card

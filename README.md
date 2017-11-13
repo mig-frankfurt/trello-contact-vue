@@ -76,6 +76,10 @@ Vue.component('trello-form', TrelloContactVue)
 | placeholder-details-text | String | false | 'Describe your problem as detailed as you can' |
 | validation-empty-text | String | false | 'Please fill out every required input field' |
 | validation-mail-text | String | false | 'This email is invalid' |
+| header-name | String | false | 'Name' |
+| header-e-mail | String | false | 'E-Mail' |
+| header-description | String | false | 'Description' |
+| header-additional-contact-data | String | false | 'Additional Contact Data' |
 | submit-button-text | String | false | 'Submit' |
 | reset-button-text | String | false | 'Reset' |
 | reload-url | String | false | `window.location.href` |
@@ -101,6 +105,10 @@ Vue.component('trello-form', TrelloContactVue)
              placeholder-details-text="Beschreiben Sie ihr Problem kurz und prägnant"
              validation-empty-text="Bitte füllen Sie alle erforderlichen Felder aus"
              validation-mail-text="Diese E-Mail-Adresse ist ungültig"
+             header-name="Name"
+             header-e-mail="E-Mail"
+             header-description="Beschreibung"
+             header-additional-contact-data="Weitere Kontaktdaten"
              submit-button-text="Abschicken"
              reset-button-text="Zurücksetzen"
              reload-url="http://localhost:8080"

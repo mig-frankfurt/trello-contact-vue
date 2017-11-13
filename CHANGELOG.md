@@ -1,6 +1,7 @@
 # Changelog
 
 ## 1.2.0
+ - [CHANGED] Headers in Trello are now configurable. (#4)
  - [CHANGED] Reload URL is now configurable. (#3)
  - [FIXED] Show error, when no lists are available. (#6)
 

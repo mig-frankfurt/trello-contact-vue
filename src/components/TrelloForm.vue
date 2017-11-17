@@ -35,7 +35,7 @@
             </div>
 
             <!-- More Contact Data -->
-            <div class="field">
+            <div v-show="showAdditionalContactData" class="field">
                 <label class="label">{{ labelContactDataText }} (optional)</label>
                 <p class="control">
                     <textarea class="textarea" :placeholder="placeholderContactDataText" v-model="formData.contactData"></textarea>
@@ -122,6 +122,13 @@
           type: String,
           required: false,
           default: 'Do you want to add another ticket?'
+        },
+        
+        // Visibility of fields
+        showAdditionalContactData: {
+          type: Boolean,
+          required: false,
+          default: true
         },
 
         // Labels
@@ -371,7 +378,7 @@
 
           // Create Description
           let description = `**${this.headerName}:** ${this.formData.name}\n**${this.headerEMail}:** ${this.formData.mail}\n\n\n**${this.headerDescription}:**\n${this.formData.inquiry}`
-          if (this.formData.contactData !== '') {
+          if (this.showAdditionalContactData && this.formData.contactData !== '') {
             description += `\n\n\n**${this.headerAdditionalContactData}:**\n${this.formData.contactData}`
           }
 

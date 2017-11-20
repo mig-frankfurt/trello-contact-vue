@@ -1,267 +1,89 @@
 <template>
     <div id="trello-form">
-        <div v-show="state.finished" class="notification is-success" :class="{ 'is-success': !state.withError, 'is-danger': state.withError }">
-            <div v-if="!state.withError">
-                {{ successText }}<br>
-                <a :href="reloadUrl">{{ redoText }}</a>
-            </div>
-            <div v-if="state.withError">
-                {{ failText }} <br>
-                => <i>{{ state.errorMessage }}</i>
-            </div>
-        </div>
-        <div v-show="!validation.allFields.areValid" class="notification is-danger">
-            {{ validationEmptyText }}
-        </div>
-        <form v-show="!state.finished" action="" autocomplete="off">
-            <!-- Name -->
-            <div class="field">
-                <label class="label">{{ labelNameText }} <span class="required">*</span></label>
-                <p class="control">
-                    <input class="input" type="text" :placeholder="placeholderNameText" v-model="formData.name" @change="undoValidation('empty')">
-                </p>
-            </div>
-
-            <!-- E-Mail -->
-            <div class="field">
-                <label class="label" :class="{ 'has-icons-right': !validation.email.isValid }">{{ labelMailText }} <span class="required">*</span></label>
-                <p class="control" :class="{ 'has-icons-right': !validation.email.isValid }">
-                    <input class="input" :class="{ 'is-danger': !validation.email.isValid }" type="email" :placeholder="placeholderMailText" v-model="formData.mail" @change="undoValidation('mail')">
-                    <span v-show="!validation.email.isValid" class="icon is-small is-right">
-                      <i class="fa fa-warning"></i>
-                    </span>
-                </p>
-                <p v-show="!validation.email.isValid" class="help is-danger">{{ validationMailText }}</p>
-            </div>
-
-            <!-- More Contact Data -->
-            <div v-show="showAdditionalContactData" class="field">
-                <label class="label">{{ labelContactDataText }} (optional)</label>
-                <p class="control">
-                    <textarea class="textarea" :placeholder="placeholderContactDataText" v-model="formData.contactData"></textarea>
-                </p>
-            </div>
-
-            <!-- Category -->
-            <div class="field">
-                <label class="label">{{ labelCategoryText }} <span class="required">*</span></label>
-                <p class="control">
-                    <span class="select">
-                      <select v-model="formData.category" @change="undoValidation('empty')">
-                        <option v-for="(c, idx) in categories" :key="idx" :value="c.id">{{ c.name }}</option>
-                      </select>
-                    </span>
-                </p>
-            </div>
-
-            <!-- Short title -->
-            <div class="field">
-                <label class="label">{{ labelTitleText }} <span class="required">*</span></label>
-                <p class="control">
-                    <input class="input" type="text" :placeholder="placeholderTitleText" v-model="formData.title" @change="undoValidation('empty')">
-                </p>
-            </div>
-
-            <!-- What can we do for you? -->
-            <div class="field">
-                <label class="label">{{ labelDetailsText }} <span class="required">*</span></label>
-                <p class="control">
-                    <textarea class="textarea area-height-l" :placeholder="placeholderDetailsText" v-model="formData.inquiry" @change="undoValidation('empty')"></textarea>
-                </p>
-            </div>
-
-            <!-- Buttons -->
-            <div class="field is-grouped">
-                <p class="control">
-                    <button class="button is-primary" @click.prevent="createCard()">{{ submitButtonText }}</button>
-                </p>
-                <p class="control">
-                    <button class="button is-link" @click.prevent="resetForm()">{{ resetButtonText }}</button>
-                </p>
-            </div>
-        </form>
+      <div v-if="cssFramework === 'bulma'">
+        <bulma-form ref="form"
+          :oauth-key="oauthKey"
+          :board-id="boardId"
+          :css-framework="cssFramework"
+          :success-text="successText"
+          :fail-text="failText"
+          :redo-text="redoText"
+          :show-additional-contact-data="showAdditionalContactData"
+          :label-name-text="labelNameText"
+          :label-mail-text="labelMailText"
+          :label-contact-data-text="labelContactDataText"
+          :label-category-text="labelCategoryText"
+          :label-title-text="labelTitleText"
+          :label-details-text="labelDetailsText"
+          :placeholder-name-text="placeholderNameText"
+          :placeholder-mail-text="placeholderMailText"
+          :placeholder-contact-data-text="placeholderContactDataText"
+          :placeholder-title-text="placeholderTitleText"
+          :placeholder-details-text="placeholderDetailsText"
+          :validation-empty-text="validationEmptyText"
+          :validation-mail-text="validationMailText"
+          :card-title-template="cardTitleTemplate"
+          :header-name="headerName"
+          :header-e-mail="headerEMail"
+          :header-additional-contact-data="headerAdditionalContactData"
+          :submit-button-text="submitButtonText"
+          :reset-button-text="resetButtonText"
+          :reload-url="reloadUrl"
+          @create="createCard()"
+        ></bulma-form>
+      </div>
+      <div v-else-if="cssFramework === 'bootstrap3'">
+        <bootstrap-3-form ref="form"
+          :oauth-key="oauthKey"
+          :board-id="boardId"
+          :css-framework="cssFramework"
+          :success-text="successText"
+          :fail-text="failText"
+          :redo-text="redoText"
+          :show-additional-contact-data="showAdditionalContactData"
+          :label-name-text="labelNameText"
+          :label-mail-text="labelMailText"
+          :label-contact-data-text="labelContactDataText"
+          :label-category-text="labelCategoryText"
+          :label-title-text="labelTitleText"
+          :label-details-text="labelDetailsText"
+          :placeholder-name-text="placeholderNameText"
+          :placeholder-mail-text="placeholderMailText"
+          :placeholder-contact-data-text="placeholderContactDataText"
+          :placeholder-title-text="placeholderTitleText"
+          :placeholder-details-text="placeholderDetailsText"
+          :validation-empty-text="validationEmptyText"
+          :validation-mail-text="validationMailText"
+          :card-title-template="cardTitleTemplate"
+          :header-name="headerName"
+          :header-e-mail="headerEMail"
+          :header-additional-contact-data="headerAdditionalContactData"
+          :submit-button-text="submitButtonText"
+          :reset-button-text="resetButtonText"
+          :reload-url="reloadUrl"
+          @create="createCard()"
+        ></bootstrap-3-form>
+      </div>
     </div>
 </template>
 
 <script>
     import _ from 'lodash'
 
+    import PropertiesMixin from './mixins/PropertiesMixin'
+    import BulmaForm from './framework/BulmaForm'
+    import Bootstrap3Form from './framework/Bootstrap3Form'
+
     export default {
       name: 'trello-contact-form',
-
-      props: {
-        oauthKey: {
-          type: String,
-          required: true
-        },
-
-        boardId: {
-          type: String,
-          required: true
-        },
-
-        cssFramework: {
-          type: String,
-          required: false,
-          default: 'bulma'
-        },
-
-        successText: {
-          type: String,
-          required: false,
-          default: 'Thank you! We have received your message.'
-        },
-
-        failText: {
-          type: String,
-          required: false,
-          default: 'Looks that something went wrong. Try again!'
-        },
-
-        redoText: {
-          type: String,
-          required: false,
-          default: 'Do you want to add another ticket?'
-        },
-        
-        // Visibility of fields
-        showAdditionalContactData: {
-          type: Boolean,
-          required: false,
-          default: true
-        },
-
-        // Labels
-        labelNameText: {
-          type: String,
-          required: false,
-          default: 'Your name'
-        },
-
-        labelMailText: {
-          type: String,
-          required: false,
-          default: 'Your e-mail'
-        },
-
-        labelContactDataText: {
-          type: String,
-          required: false,
-          default: 'Additional contact data'
-        },
-
-        labelCategoryText: {
-          type: String,
-          required: false,
-          default: 'Category'
-        },
-
-        labelTitleText: {
-          type: String,
-          required: false,
-          default: 'Title'
-        },
-
-        labelDetailsText: {
-          type: String,
-          required: false,
-          default: 'Details'
-        },
-
-        // Placeholder
-        placeholderNameText: {
-          type: String,
-          required: false,
-          default: 'e.g. John Doe'
-        },
-
-        placeholderMailText: {
-          type: String,
-          required: false,
-          default: 'e.g. jdoe@mail.fake'
-        },
-
-        placeholderContactDataText: {
-          type: String,
-          required: false,
-          default: 'Additional Contact Data'
-        },
-
-        placeholderTitleText: {
-          type: String,
-          required: false,
-          default: 'e.g. Help with problem XYZ'
-        },
-
-        placeholderDetailsText: {
-          type: String,
-          required: false,
-          default: 'Describe your problem as detailed as you can'
-        },
-
-        validationEmptyText: {
-          type: String,
-          required: false,
-          default: 'Please fill out every required input field'
-        },
-
-        validationMailText: {
-          type: String,
-          required: false,
-          default: 'This email is invalid'
-        },
-        
-        // Card Title Template
-        cardTitleTemplate: {
-          type: String,
-          required: false,
-          default: '{title}'
-        },
-        
-        // Headers in Trello
-        headerName: {
-          type: String,
-          required: false,
-          default: 'Name'
-        },
-        
-        headerEMail: {
-          type: String,
-          required: false,
-          default: 'E-Mail'
-        },
-        
-        headerDescription: {
-          type: String,
-          required: false,
-          default: 'Description'
-        },
-        
-        headerAdditionalContactData: {
-          type: String,
-          required: false,
-          default: 'Additional Contact Data'
-        },
-
-        // Buttons
-        submitButtonText: {
-          type: String,
-          required: false,
-          default: 'Submit'
-        },
-
-        resetButtonText: {
-          type: String,
-          required: false,
-          default: 'Reset'
-        },
-        
-        // Reload URL
-        reloadUrl: {
-          type: String,
-          required: false,
-          default: () => window.location.href
-        }
+      
+      mixins: [
+        PropertiesMixin
+      ],
+      
+      components: {
+        BulmaForm,
+        Bootstrap3Form
       },
 
       mounted () {
@@ -292,7 +114,7 @@
             })
             .sortBy((label) => label.name.toLowerCase())
             .map((label) => {
-              this.categories.push({ name: label.name, id: label.id, color: label.color })
+              this.$refs.form.categories.push({ name: label.name, id: label.id, color: label.color })
             })
             .value()
         }, () => {
@@ -305,7 +127,7 @@
           let firstList = _(response).first()
           
           if (firstList !== undefined) {
-            this.listId = firstList.id
+            this.$refs.form.listId = firstList.id
           } else {
             this.finishWithError('There is no list on board available. Please create one in Trello first.')
           }
@@ -313,73 +135,13 @@
           this.finishWithError('Could not retrieve list id')
         })
       },
-
-      data () {
-        return {
-          state: {
-            finished: false,
-            withError: false,
-            errorMessage: ''
-          },
-          listId: '',
-          categories: [],
-          formData: {
-            name: '',
-            mail: '',
-            contactData: '',
-            category: '',
-            title: '',
-            inquiry: ''
-          },
-          validation: {
-            email: {
-              isValid: true
-            },
-            allFields: {
-              areValid: true
-            }
-          }
-        }
-      },
-
-      computed: {
-        nameIsEmpty () {
-          return this.formData.name === ''
-        },
-
-        mailIsEmpty () {
-          return this.formData.mail === ''
-        },
-
-        categoryIsEmpty () {
-          return this.formData.category === ''
-        },
-
-        titleIsEmpty () {
-          return this.formData.title === ''
-        },
-
-        inquiryIsEmpty () {
-          return this.formData.inquiry === ''
-        }
-      },
-
+      
       methods: {
         createCard () {
-          if (this.nameIsEmpty || this.mailIsEmpty || this.categoryIsEmpty || this.titleIsEmpty || this.inquiryIsEmpty) {
-            this.validation.allFields.areValid = false
-            return
-          }
-
-          if (!this.mailIsValid(this.formData.mail)) {
-            this.validation.email.isValid = false
-            return
-          }
-
           // Create Description
-          let description = `**${this.headerName}:** ${this.formData.name}\n**${this.headerEMail}:** ${this.formData.mail}\n\n\n**${this.headerDescription}:**\n${this.formData.inquiry}`
-          if (this.showAdditionalContactData && this.formData.contactData !== '') {
-            description += `\n\n\n**${this.headerAdditionalContactData}:**\n${this.formData.contactData}`
+          let description = `**${this.headerName}:** ${this.$refs.form.formData.name}\n**${this.headerEMail}:** ${this.$refs.form.formData.mail}\n\n\n**${this.headerDescription}:**\n${this.$refs.form.formData.inquiry}`
+          if (this.showAdditionalContactData && this.$refs.form.formData.contactData !== '') {
+            description += `\n\n\n**${this.headerAdditionalContactData}:**\n${this.$refs.form.formData.contactData}`
           }
 
           // Build card
@@ -387,8 +149,8 @@
             name: this.buildCardTitle(),
             desc: description,
             pos: 'bottom',
-            idList: this.listId,
-            idLabels: [this.formData.category]
+            idList: this.$refs.form.listId,
+            idLabels: [this.$refs.form.formData.category]
           }
 
           // Send card to Trello
@@ -401,26 +163,16 @@
             this.finishWithError('Could not sent message to Trello')
           })
         },
-
-        resetForm () {
-          this.formData = {
-            name: '',
-            mail: '',
-            contactData: '',
-            category: '',
-            title: '',
-            inquiry: ''
-          }
-        },
         
         buildCardTitle () {
           let replaceables = {
-            '{name}': this.formData.name,
-            '{email}': this.formData.mail,
-            '{contactData}': this.formData.contactData,
-            '{category}': this.getCategoryName(this.formData.category),
-            '{title}': this.formData.title,
-            '{inquiry}': this.formData.inquiry
+            '{name}': this.$refs.form.formData.name,
+            '{email}': this.$refs.form.formData.mail,
+            '{contactData}': this.$refs.form.formData.contactData,
+            '{category}': this.getCategoryName(this.$refs.form.formData.category),
+            '{title}': this.$refs.form.formData.title,
+            '{inquiry}': this.$refs.form.formData.inquiry,
+            '{dateNumber}': this.generateDateNumber
           }
           
           let cardTitle = this.cardTitleTemplate
@@ -429,6 +181,38 @@
           }
           
           return cardTitle
+        },
+        
+        generateDateNumber () {
+          let today = new Date()
+          let ss = today.getSeconds()
+          let MM = today.getMinutes()
+          let HH = today.getHours()
+          let dd = today.getDate()
+          let mm = today.getMonth() + 1
+          let yyyy = today.getFullYear()
+          
+          if (ss < 10) {
+            ss = `0${ss}`
+          }
+          
+          if (MM < 10) {
+            MM = `0${MM}`
+          }
+          
+          if (HH < 10) {
+            HH = `0${HH}`
+          }
+          
+          if (dd < 10) {
+            dd = `0${dd}`
+          }
+          
+          if (mm < 10) {
+            mm = `0${mm}`
+          }
+          
+          return `${yyyy}-${mm}-${dd}-${HH}${MM}${ss}`
         },
         
         replacePlaceholder (str, placeholder, replacer) {
@@ -440,7 +224,7 @@
         },
         
         getCategoryName (id) {
-          return _.find(this.categories, (category) => category.id === id).name
+          return _.find(this.$refs.form.categories, (category) => category.id === id).name
         },
 
         authenticationSuccess () {
@@ -453,30 +237,14 @@
         },
 
         finishWithError (error) {
-          this.state.finished = true
-          this.state.withError = true
-          this.state.errorMessage = error
+          this.$refs.form.state.finished = true
+          this.$refs.form.state.withError = true
+          this.$refs.form.state.errorMessage = error
         },
 
         finishWithoutError () {
-          this.state.finished = true
-          this.state.withError = false
-        },
-
-        mailIsValid (mail) {
-          let re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-          return re.test(mail)
-        },
-
-        undoValidation (field) {
-          switch (field) {
-            case 'empty':
-              this.validation.allFields.areValid = true
-              break
-            case 'mail':
-              this.validation.email.isValid = true
-              this.validation.allFields.areValid = true
-          }
+          this.$refs.form.state.finished = true
+          this.$refs.form.state.withError = false
         }
       }
     }

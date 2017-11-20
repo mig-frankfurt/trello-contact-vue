@@ -1,4 +1,5 @@
 .DS_Store
+.vscode/
 node_modules/
 dist/static/js/*
 dist/static/*
@@ -12,5 +13,6 @@ selenium-debug.log
 .env
 .idea/
 index.html
+static/frameworks/
 !dist/static/js/trello-contact-vue.js
 !dist/static/js/trello-contact-vue.js.map

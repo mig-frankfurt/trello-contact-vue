@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.1
+ - [FIXED] Flying cross in Bootstrap version.
+
 ## 1.2.0
  - [ADDED] Support for Bootstrap3. (#1)
  - [CHANGED] Optional field can now be hidden. (#2)

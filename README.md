@@ -117,6 +117,7 @@ Vue.component('trello-form', TrelloContactVue)
              placeholder-details-text="Beschreiben Sie ihr Problem kurz und prägnant"
              validation-empty-text="Bitte füllen Sie alle erforderlichen Felder aus"
              validation-mail-text="Diese E-Mail-Adresse ist ungültig"
+             card-title-template="{title} von {name} (#{dateNumber})"
              header-name="Name"
              header-e-mail="E-Mail"
              header-description="Beschreibung"

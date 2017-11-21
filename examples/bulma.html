@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Bulma Example</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
     <style>
         html {
             height: 100%;
@@ -38,9 +38,11 @@
     <div class="container form-container">
         <trello-form oauth-key="[oauth-key]"
                      board-id="[board-id]"
+                     css-framework="bulma"
                      success-text="Vielen Dank! Wir haben Ihre Anfrage entgegengenommen."
                      fail-text="Hoppla, da ist wohl etwas schief gelaufen. Versuchen Sie es nochmal."
                      redo-text="Möchten Sie eine weitere Anfrage einreichen?"
+                     :show-additional-contact-data="true"
                      label-name-text="Ihr Name"
                      label-mail-text="Ihre E-Mail"
                      label-contact-data-text="Weitere Kontaktdaten"
@@ -52,8 +54,16 @@
                      placeholder-contact-data-text="Haus? Raumnummer? Telefonnummer?"
                      placeholder-title-text="z.B. Hilfe beim Unwandeln von Patientendaten"
                      placeholder-details-text="Beschreiben Sie ihr Problem kurz und prägnant"
+                     validation-empty-text="Bitte füllen Sie alle erforderlichen Felder aus"
+                     validation-mail-text="Diese E-Mail-Adresse ist ungültig"
+                     card-title-template="{title} von {name} (#{dateNumber})"
+                     header-name="Name"
+                     header-e-mail="E-Mail"
+                     header-description="Beschreibung"
+                     header-additional-contact-data="Weitere Kontaktdaten"
                      submit-button-text="Abschicken"
                      reset-button-text="Zurücksetzen"
+                     reload-url="http://localhost:8080"
         ></trello-form>
     </div>
 </div>

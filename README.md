@@ -2,22 +2,29 @@
 
 > Trello Contact Vue is a Vue.js library for transforming Trello into a ticket system without any hassle. You just import the library and add your Trello keys and your board id - thats it.
 
-## Features
+## :package: Features
 
  - Can be imported into any Vue.js powered front end
- - Reads the board label names and add them as categories into the contact form
+ - Reads the board label names and adds them as categories into the contact form
  - Displays all informations well-formatted in the description section (categories will be transformed to card labels)
- - All new cards will be added to the left list on the board
- - Supports following CSS Frameworks: Bulma *(more to come!)*
+ - All new cards will be added to the first list on the board (left list)
+ - Displayed title on Trello can be configured using a template
+ - Form labels can be configured
+ - Supports following CSS Frameworks: 
+   - Bulma
+   - Bootstrap 3
+   - *(more to come!)*
 
 ![](https://github.com/mig-frankfurt/trello-contact-vue/blob/master/readme/demonstration_small.gif?raw=true)
 
-## Install
+## :hammer: Install
 
 ### Prequisites
 
  - [Vue.js](https://vuejs.org/) (`npm install vue`)
- - [Bulma](http://bulma.io)
+ - One of those CSS-Frameworks:
+    - [Bulma](http://bulma.io)
+    - [Bootstrap 3](https://getbootstrap.com/docs/3.3/)
 
 ### npm
 
@@ -44,8 +51,9 @@ Vue.component('trello-form', TrelloContactVue)
 ### Examples
 
  - [Bulma](https://github.com/mig-frankfurt/trello-contact-vue/blob/master/examples/bulma.html)
+ - [Bootstrap 3](https://github.com/mig-frankfurt/trello-contact-vue/blob/master/examples/bootstrap3.html)
 
-## Documentation
+## :wrench: Configuration
 
 ### Minimal import
 
@@ -59,10 +67,11 @@ Vue.component('trello-form', TrelloContactVue)
 | -------- | ---- | -------- | ------------- |
 | oauth-key | String | true | - |
 | board-id | String | true | - |
-| css-framework | String { 'bulma' } | false | 'bulma' |
+| css-framework | String { <br>'bulma',<br> 'bootstrap3'<br> } | false | 'bulma' |
 | success-text | String | false | 'Thank you! We have received your message.' |
 | fail-text | String | false | 'Looks that something went wrong. Try again!' |
 | redo-text | String | false | 'Do you want to add another ticket?' |
+| show-additional-contact-data | bool | false | true |
 | label-name-text | String | false | 'Your name' |
 | label-mail-text | String | false | 'Your e-mail' |
 | label-contact-data-text | String | false | 'Additional contact data' |
@@ -76,17 +85,25 @@ Vue.component('trello-form', TrelloContactVue)
 | placeholder-details-text | String | false | 'Describe your problem as detailed as you can' |
 | validation-empty-text | String | false | 'Please fill out every required input field' |
 | validation-mail-text | String | false | 'This email is invalid' |
+| card-title-template | String | false | '{title}' <br>*Valid placeholders:* <br>{name}, {email}, {contactData}, {category}, {title}, {inquiry}, {dateNumber} |
+| header-name | String | false | 'Name' |
+| header-e-mail | String | false | 'E-Mail' |
+| header-description | String | false | 'Description' |
+| header-additional-contact-data | String | false | 'Additional Contact Data' |
 | submit-button-text | String | false | 'Submit' |
 | reset-button-text | String | false | 'Reset' |
+| reload-url | String | false | `window.location.href` |
 
 ### Full import
 
 ```html
 <trello-form oauth-key="[oauth-key]"
              board-id="[board-id]"
+             css-framework="bootstrap3"
              success-text="Vielen Dank! Wir haben Ihre Anfrage entgegengenommen."
              fail-text="Hoppla, da ist wohl etwas schief gelaufen. Versuchen Sie es nochmal."
              redo-text="Möchten Sie eine weitere Anfrage einreichen?"
+             :show-additional-contact-data="false"
              label-name-text="Ihr Name"
              label-mail-text="Ihre E-Mail"
              label-contact-data-text="Weitere Kontaktdaten"
@@ -100,12 +117,18 @@ Vue.component('trello-form', TrelloContactVue)
              placeholder-details-text="Beschreiben Sie ihr Problem kurz und prägnant"
              validation-empty-text="Bitte füllen Sie alle erforderlichen Felder aus"
              validation-mail-text="Diese E-Mail-Adresse ist ungültig"
+             card-title-template="{title} von {name} (#{dateNumber})"
+             header-name="Name"
+             header-e-mail="E-Mail"
+             header-description="Beschreibung"
+             header-additional-contact-data="Weitere Kontaktdaten"
              submit-button-text="Abschicken"
              reset-button-text="Zurücksetzen"
+             reload-url="http://localhost:8080"
 ></trello-form>
 ```
 
-## How to build (for developers only)
+## :satellite: How to build (for developers only)
 
 ``` bash
 # install dependencies
@@ -130,17 +153,17 @@ npm run e2e
 npm test
 ```
 
-## Developed by
+## :hospital: Developed by
 
-Medical Informatics Group (MIG)\
-University Hospital Frankfurt\
-Theodor-Stern-Kai 7\
-60590 Frankfurt
-[mig-frankfurt.de](https://www.mig-frankfurt.de/)
+Medical Informatics Group (MIG)<br>
+University Hospital Frankfurt<br>
+Theodor-Stern-Kai 7<br>
+60590 Frankfurt<br>
+[https://www.mig-frankfurt.de](https://www.mig-frankfurt.de/)
 
 **Maintained by:** Patric Vormstein (vormstein@med.uni-frankfurt.de)
 
-## License
+## :page_with_curl: License
 
 MIT License
 

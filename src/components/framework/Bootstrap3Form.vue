@@ -24,7 +24,7 @@
             <div class="form-group" :class="{ 'has-error': !validation.email.isValid, 'has-feedback': !validation.email.isValid }">
                 <label for="emailInput" class="control-label">{{ labelMailText }} <span class="required">*</span></label>
                 <input id="emailInput" class="form-control" :class="{ 'is-danger': !validation.email.isValid }" type="email" :placeholder="placeholderMailText" v-model="formData.mail" @change="undoValidation('mail')">
-                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                <span v-show="!validation.email.isValid" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                 <p v-show="!validation.email.isValid" class="help-block">{{ validationMailText }}</p>
             </div>
 
